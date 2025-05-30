@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emoji Translator + Sentiment Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .output pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🌍 Emoji Translator + Sentiment Analyzer 🌍</h2>
+        <form method="POST">
+            <label for="text">Enter Text with Emojis:</label>
+            <textarea name="text" rows="4" required></textarea>
+
+            <label for="lang">Target Language Code (e.g., en, fr, es, hi, te):</label>
+            <input type="text" name="lang" required>
+
+            <button type="submit">Translate & Analyze</button>
+        </form>
+
+        {% if result %}
+        <div class="output">
+            <h3>Results:</h3>
+            <pre><strong>Original:</strong> {{ result.original }}</pre>
+            <pre><strong>Expanded:</strong> {{ result.expanded }}</pre>
+            <pre><strong>Translated:</strong> {{ result.translated }}</pre>
+            <pre><strong>Emoji Meanings:</strong> {{ result.emoji_meanings | join(', ') }}</pre>
+            <pre><strong>Sentiment:</strong> {{ result.sentiment.sentiment }} (Polarity: {{ result.sentiment.polarity }}, Subjectivity: {{ result.sentiment.subjectivity }})</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
